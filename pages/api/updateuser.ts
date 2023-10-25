@@ -15,7 +15,7 @@ export default async function handler(
     }
 
     // Check if the user exists
-    const user = await prisma.user.findUnique({
+    const user = await prisma.demoUser.findUnique({
       where: { id: req.body.id },
     });
 
@@ -24,7 +24,7 @@ export default async function handler(
     }
 
     // Update the user data
-    const updatedUser = await prisma.user.update({
+    const updatedUser = await prisma.demoUser.update({
       where: {
         id: req.body.id,
       },

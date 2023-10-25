@@ -1,0 +1,20 @@
+generator client {
+  recursive_type_depth = 5
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgres://postgres:db_password@localhost:5432/demo-user-db"
+}
+
+model demoUser{
+  id           Int           @id @default(autoincrement())
+  userName     String        @db.VarChar(10)
+  email        String        @unique
+  password     String
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+}
+
+

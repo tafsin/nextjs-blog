@@ -18,14 +18,6 @@ export default async function POST(req: NextApiRequest,
         if(existingEmail){
             return res.json({user: null,message: "user already exists"})
         }
-        const existingUserName = await prisma.demoUser.findUnique(
-            {
-                where: {userName : userName}
-            }
-        ) 
-        if(existingEmail){
-            return res.json({user: null,message: "user already exists"})
-        }
         const newUser = await prisma.demoUser.create(
             {
                 data :{

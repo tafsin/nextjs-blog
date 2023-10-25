@@ -9,17 +9,16 @@ export default async function handler(
 ) {
   try {
     // Extract the user ID from the request parameters (or query if it's in the URL)
-    const userEmail = Array.isArray(req.query.email)
-                     ? req.query.email[0]
-                     : req.query.email;
+    const userId = (req.query.id)
 
-    if (!userEmail) {
+    if (!userId) {
       throw new Error('User ID is required');
     }
 
     // Check if the user exists
-    const user = await prisma.user.findUnique({
-      where: { email: userEmail },
+    const id: number = parseInt(userId as string);
+    const user = await prisma.demoUser.findUnique({
+      where: { id: id },
     });
 
     if (!user) {
@@ -27,8 +26,8 @@ export default async function handler(
     }
 
     // Delete the user
-    await prisma.user.delete({
-      where: { email: userEmail },
+    await prisma.demoUser.delete({
+      where: { id: id },
     });
 
     res.status(200).json({
